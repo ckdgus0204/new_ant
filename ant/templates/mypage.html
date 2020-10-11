@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet"> <!-- 폰트 -->
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+               
+<title>주가예측 기반 금융 거래 자동화</title>
+<style>
+    a {
+        text-decoration: none
+    }
+    .container{
+      font-family: 'Jua', sans-serif;
+
+    }
+    .topmenu {
+            margin-left: auto; margin-right: 0px;
+            font-family: 'Jua', sans-serif;
+            font-size: 23px;
+        }
+    .mypage_table {
+        margin-top: 50px;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+    }
+
+    .mypage_table td {
+        width: 250px;
+    }
+
+    .have_list {
+        border-collapse: collapse;
+        border:solid 1px;
+        margin: 10px;
+    }
+    .have_list tr{
+        border: solid 1px;
+    }
+    .have_list td{
+        border: solid 1px;
+    }
+    h1{
+        margin-bottom:30px;
+    }
+
+    
+
+</style>
+
+<!--차트그리기 script-->
+<script>
+    window.onload = function() {
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        
+        data: [{
+            type: "pie",
+            startAngle: 240,
+            yValueFormatString: "##0.00\"%\"",
+            indexLabel: "{label} {y}",
+            dataPoints: [
+                {y: 79.45, label: "삼성"},
+                {y: 7.31, label: "LG전자"},
+                {y: 7.06, label: "SK증권"},
+                {y: 3.06, label: "카카오"}
+            ]
+        }]
+    });
+    chart.render();
+    
+    }
+    </script>
+
+</head>
+
+<body>
+    {% block content %}
+    <table class="topmenu"><!--최상단 회원명|HOME|마이페이지-->
+        <tr>
+            {% if user.is_authenticated %}
+            <td>
+                <a href="#" style="color:black;">{{ user.username }} </a>
+            <td>|</td>
+            <td><a href="{% url 'logout' %}">로그아웃</a></td>
+            <td>|</td>
+            <td><a href="{% url 'home' %}">HOME</a></td>
+            <td>|</td>
+            <td><a href="{% url 'mypage' %}">마이페이지</a></td>
+            {% else %}
+            <td><a href="{% url 'home' %}">HOME</a></td>
+            <td>|</td>
+            <td><a href="{% url 'login' %}">로그인</a></td>
+            <td>|</td>
+            <td><a href="{% url 'signup' %}">회원가입</a></td>
+        
+            {% endif %}
+        </tr>
+    </table><!--최상단 회원명|HOME|마이페이지 끝-->
+    {% endblock %}
+    <div class="container">
+        <table class="table"><!--세가지 탭 및 내역 테이블-->
+            <tr>
+                <th style="text-align: left; "colspan="3"><h1>My Page</h1></th>
+            </tr>
+            <tr >
+                <br>
+                <td style="font-size: 30px;text-align: center">보유종목</td>
+                <td style="width: 500px;font-size: 30px;text-align: center">보유종목 차트</td>
+                <td style="font-size: 30px;text-align: center">잔고내역</td>
+            </tr>
+            <tr>
+                <td style="height:400px;" >
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">종목</th>
+                            <th scope="col">보유량</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>삼성</td>
+                            <td>79.45%</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>LG</td>
+                            <td>7.31%</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>SK증권</td>
+                            <td>7.06%</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">4</th>
+                            <td>카카오</td>
+                            <td>3.06%</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </td>
+                <td style="height:400px; " >
+                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                </td>
+                <td style="height:400px; " >
+                        
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <td>총매입</td>
+                            <td >824,000</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>총평가</td>
+                            <td>834,768</td>
+                          </tr>
+                          <tr>
+                            <td>손익</td>
+                            <td>10,768</td>
+                          </tr>
+                          <tr>
+                            <td>수익률</td>
+                            <td>1.306%</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                
+            </tr>
+        </table><!--세가지 탭 및 내역 테이블 끝-->
+    </div>
+    
+
+</body>
+</html>

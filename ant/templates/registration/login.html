@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  
+  <title>주가예측 기반 금융 거래 자동화</title>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet"> <!-- 폰트 -->
+  <style>
+      .idpw{
+          font-family: 'Jua', sans-serif;
+          padding:10px;
+          margin-right: auto;
+          margin-left: auto;
+          font-size: 17px;
+      }
+      .idpw td{
+          
+          padding:8px;
+          
+      }
+      
+      .btnset2{
+        font-family: 'Jua', sans-serif;
+        
+          width: 100%;
+          text-align: center;
+      }
+      .btn2{
+        font-family: 'Jua', sans-serif;
+        font-size: 20px;
+          width: 100px;
+          height: 30px;
+          margin-top: 10px;
+          margin-bottom: 20px;
+
+          
+      }
+      .loginbtn{
+          vertical-align: middle;
+        font-family: 'Jua', sans-serif;
+        font-size: 22px;
+          width: 70px;
+          height: 50px;
+      }
+      .text-center{
+        font-family: 'Jua', sans-serif;
+        font-size: 30px;
+      }
+  </style>
+</head>
+
+<body>
+	<form method="POST" action="{% url 'login' %}" class="container container-fluid" style="width:500px;margin-top:100px;margin-left: auto;margin-right: auto;">
+		<h2 class="text-center">자동화 금융 투자</h2>
+		<fieldset>
+            {% csrf_token %}
+
+			<legend style="font-family: 'Jua', sans-serif;font-size: 22px;">로그인</legend>
+
+			<div class="form-group col">
+                <table class="idpw">                
+                {% block content %}
+                <tr>
+                    {% if user.is_authenticated %}
+                    로그인성공 
+                    {% else %}
+                    <tr>
+                        <td>
+                            <label>아이디</label> 
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="아이디를 입력해주세요" name="username">
+                        </td>
+                        <td rowspan="2">
+                            <button type="submit" class="loginbtn"class="btn btn-primary" value="login">로그인</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <label>패스워드</label> 
+                        </td>
+                        <td>
+                        <input type="password" class="form-control" placeholder="패스워드를 입력해주세요" name="password">
+                    </td>
+                    </tr>
+                    {% endif %}   
+                </table>
+				
+			</div>
+			<div class="btnset2">
+                <button type="button" class="btn2" onclick= "location.href='{% url 'signup' %}'">회원가입</button>
+                <button type="button" class="btn2" onclick= "location.href=''">아이디찾기</button>
+                <button type="button" class="btn2" onclick= "location.href='{% url "home" %}'">홈으로</button>
+			</div>
+		</fieldset>
+    </form>
+    {% endblock %}   
+
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>주가예측 기반 금융 거래 자동화</title>
+           <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet"> <!-- 폰트 -->
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <style>
+        .maintable{
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            font-family: 'Jua', sans-serif;
+
+        }
+        .maintable td{
+            width:500px;
+        }
+        .cont_div{
+            height: 500px;
+        }
+        
+        .topmenu {
+            margin-left: auto; margin-right: 0px;
+            font-family: 'Jua', sans-serif;
+            font-size: 23px;
+        }
+        .sele_table{
+          margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div >
+      {% block content %}
+      <table class="topmenu"><!--최상단 회원명|HOME|마이페이지-->
+          <tr>
+              {% if user.is_authenticated %}
+              <td>
+                  <a href="#" style="color:black;">{{ user.username }}  </a>
+              <td>|</td>
+              <td><a href="{% url 'logout' %}">로그아웃</a></td>
+              <td>|</td>
+              <td><a href="{% url 'home' %}">HOME</a></td>
+              <td>|</td>
+              <td><a href="{% url 'mypage' %}">마이페이지</a></td>
+              {% else %}
+              <td><a href="{% url 'home' %}">HOME</a></td>
+              <td>|</td>
+              <td><a href="{% url 'login' %}">로그인</a></td>
+              <td>|</td>
+              <td><a href="{% url 'signup' %}">회원가입</a></td>
+          
+              {% endif %}
+          </tr>
+      </table><!--최상단 회원명|HOME|마이페이지 끝-->
+   
+
+    </div>
+    <table class="sele_table"><!--가장 큰 테이블 틀-->
+    <div>
+        <table class="maintable">
+            <tr>
+                <td style="text-align: left;">
+                    <h1>시뮬레이션 종목 선정</h1>
+                </td>
+                <td>
+                    <div style="border:solid 1px;">
+                        2020년 6월 23일 주가예측 기반 모의 거래
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="cont_div"style="border:solid 1px;">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">종목 이름</th>
+                                <th scope="col">매입 가격</th>
+                                <th scope="col">매입량</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>삼성전자</td>
+                                <td>901,372</td>
+                                <td>10주</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>네이버</td>
+                                <td>50,246</td>
+                                <td>1주</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td>kakao</td>
+                                <td>620,856</td>
+                                <td>100주</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                       
+                        
+
+                    </div>
+                </td>
+                <td>
+                    <div class="cont_div"style="border:solid 1px;">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">현재가격</th>
+                                <th scope="col">손익</th>
+                                <th scope="col">상한</th>
+                                <th scope="col">하한</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>900,264</td>
+                                <td>+1,308</td>
+                                <td>933,432</td>
+                                <td>890,592</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>49,362</td>
+                                <td>-884</td>
+                                <td>53,423</td>
+                                <td>47,568</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td>610,357</td>
+                                <td>-10,499</td>
+                                <td>610,532</td>
+                                <td>570,351</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+    <div class="container">
+      <div class="col">
+        <div class="row">
+          <button type="button" style="margin-right: 0px;font-family: 'Jua', sans-serif;" class="btn pull-right" onclick="location.href='{% url 's_select' %}'">시뮬레이션 등록</button>
+
+        </div>
+
+      </div>
+      
+    </div>
+    {% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+               <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet"> <!-- 폰트 -->
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+  <title>주가예측 기반 금융 거래 자동화</title>
+  <style>
+      header{
+        text-align:center;
+        font-family: 'Jua', sans-serif;
+        font-size:50px;
+      }
+      a {
+            text-decoration: none;
+        }
+        .topmenu {
+            margin-left: auto; margin-right: 0px;
+            font-family: 'Jua', sans-serif;
+            font-size: 23px;
+        }
+        .trade_table{
+            border-collapse: collapse;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .trade_table td{
+            width: 300px;
+        }
+        .trade_btn{
+            width:100%;
+            height:50px;
+        }
+        .container{
+          font-family: 'Jua', sans-serif;
+        }
+        .stock_form{
+            margin: 10px;
+        }
+  </style>
+
+</head>
+
+<body>
+
+    {% block content %}
+    <table class="topmenu"><!--최상단 회원명|HOME|마이페이지-->
+        <tr>
+            {% if user.is_authenticated %}
+            <td>
+                <a href="#" style="color:black;">{{ user.username }}  </a>
+            <td>|</td>
+            <td><a href="{% url 'logout' %}">로그아웃</a></td>
+            <td>|</td>
+            <td><a href="{% url 'home' %}">HOME</a></td>
+            <td>|</td>
+            <td><a href="{% url 'mypage' %}">마이페이지</a></td>
+            {% else %}
+            <td><a href="{% url 'home' %}">HOME</a></td>
+            <td>|</td>
+            <td><a href="{% url 'login' %}">로그인</a></td>
+            <td>|</td>
+            <td><a href="{% url 'signup' %}">회원가입</a></td>
+        
+            {% endif %}
+        </tr>
+    </table><!--최상단 회원명|HOME|마이페이지 끝-->
+    {% endblock %}
+    <header style="margin-bottom: 30px;margin-top: 30px;">자동거래</header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p style="font-size: 30px; margin-left: 20px; margin-top: 10px;"> 체결목록</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">종목</th>
+                        <th scope="col">수량</th>
+                        <th scope="col">가격</th>
+                        <th scope="col">구분</th>
+                        <th scope="col">손익</th>
+                        <th scope="col">현재상태</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>삼성전자</td>
+                        <td>10</td>
+                        <td>910,372</td>
+                        <td>매입</td>
+                        <td>+4,948</td>
+                        <td>거래중</td>
+                        <td><button type="button" class="btn btn-light">중지</button></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>카카오</td>
+                        <td>20</td>
+                        <td>473,438</td>
+                        <td>매입</td>
+                        <td>+34,030</td>
+                        <td>거래중</td>
+                        <td><button type="button" class="btn btn-light">중지</button></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>SK하이닉스</td>
+                        <td>20</td>
+                        <td>1,304,572</td>
+                        <td>매입</td>
+                        <td>+29,603</td>
+                        <td>거래중</td>
+                        <td><button type="button" class="btn btn-light">중지</button></td>
+                       </tr>
+                       <tr>
+                         <td colspan="8">
+                          <div class="row">
+                            <div class="col">
+                                <form class="stock_form">
+                                    <div class="form-row">
+                                      <div class="col-4">
+                                        <input type="text" class="form-control" placeholder="종목 이름">
+                                      </div>
+                                      <div class="col-2">
+                                        <input type="number" class="form-control" placeholder="매입 가격">
+                                      </div>
+                                      <div class="col-2">
+                                        <input type="number" class="form-control" placeholder="거래량">
+                                      </div>
+                                      <div class="col-1">
+                                        <button type="button" class="btn btn-light">등록</button>
+                                      </div>
+                                      
+                                    </div>
+                                  </form>
+                            </div>
+                        </div>       
+                         </td>
+                       </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet"> <!-- 폰트 -->
+  <title>주가예측 기반 금융 거래 자동화</title>
+  <style>
+      .info{
+          margin: 10px;
+          margin-right: auto;
+          margin-left: auto;
+          font-family: 'Jua', sans-serif;
+            font-size: 23px;
+      }
+      .info td{
+          padding: 8px;
+          font-family: 'Jua', sans-serif;
+            font-size: 23px;
+      }
+      .btnset{
+          width: 100%;
+          text-align:center;
+          font-family: 'Jua', sans-serif;
+            font-size: 23px;
+      }
+      .btn1{
+          width: 100px;
+          height: 30px;
+          margin:10px;
+          font-family: 'Jua', sans-serif;
+            font-size: 23px;
+      }
+      .head_title{
+        font-family: 'Jua', sans-serif;
+            font-size: 30px;
+      }
+  </style>
+</head>
+<body>
+    {% block content %}
+    
+<form class="container container-fluid" action="{% url 'signup' %}" method="POST" style="width:500px;margin-top:100px;margin-left: auto;margin-right: auto;" >
+
+    <h2 class="head_title">회 원 가 입</h2>
+    <fieldset>
+
+        <legend style="font-family: 'Jua', sans-serif; font-size: 23px;">정 보</legend>
+        <table class="info">
+            
+                <div class="container">
+                {% csrf_token %}
+
+                <tr>
+                    <td><label>아이디</label></td>
+                    <td> <input type="text" placeholder="아이디를 입력해주세요" name="username" required></td>
+                </tr>
+                <tr>
+                    <td><label>패스워드</label></td>
+                    <td><input type="password" class="form-control" placeholder="패스워드를 입력해주세요" name="password" required></td>
+                </tr>
+                <tr>
+                    <td><label>패스워드 확인</label></td>
+                    <td><input type="password" class="form-control" placeholder="패스워드를 입력해주세요" name="password2" required></td>
+                </tr>
+                <tr>
+                    <td><label>이름</label></td>
+                    <td><input type="text" class="form-control" placeholder="이름을 입력해주세요" name="name" value="" required></td>
+                </tr>
+                <tr>
+                    <td><label>잔고</label></td>
+                    <td><input type="number" class="form-control" placeholder="잔고를 입력해주세요" name="account" value="" required> </td> 
+                </tr>
+                
+            </div>
+        </table>
+            <div class="btnset">
+            <button type="button" class="btn1" onclick="location.href='{% url 'home' %}'">홈으로</button>
+            <button type="submit" class="btn1" value="signup">가입하기</button>
+        </div>
+        {% endblock %}
+
+        
+    </fieldset>
+</form>
+
+</body>
+</html>
