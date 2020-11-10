@@ -3,13 +3,16 @@ from accounts.models import User
 # Create your models here.
 
 class Stockitem(models.Model):
-    stock_num = models.IntegerField(primary_key=True)
+    stock_num = models.CharField(primary_key=True,max_length=15)
     name = models.CharField(max_length=45, blank=True, null=True)
     representative = models.CharField(max_length=45, blank=True, null=True)
     price = models.FloatField(blank=True, null=True)
     numofstock = models.FloatField(blank=True, null=True)
     probabilitytowin = models.FloatField(blank=True, null=True)
     probabilitytolose = models.FloatField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 class Autoset(models.Model):
     auto_num = models.IntegerField(primary_key=True)
@@ -25,12 +28,17 @@ class Autoset(models.Model):
     start_date = models.CharField(max_length=45, blank=True, null=True)
     end_date = models.CharField(max_length=45, blank=True, null=True)
 
+    def __str__(self):
+        return self.sname
+
 class Predictrate(models.Model):
     stock_num = models.OneToOneField(Stockitem, models.DO_NOTHING, db_column='stock_num', primary_key=True)
     name = models.CharField(max_length=45, blank=True, null=True)
     numofstock = models.FloatField(blank=True, null=True)
     persent = models.FloatField(blank=True, null=True)
-
+    
+    def __str__(self):
+        return self.name
 
 
 class Simulation(models.Model):
@@ -45,4 +53,5 @@ class Simulation(models.Model):
     profit = models.FloatField(blank=True, null=True)
     start_date = models.CharField(max_length=45, blank=True, null=True)
     end_date = models.CharField(max_length=45, blank=True, null=True)
-
+    def __str__(self):
+        return self.sname
