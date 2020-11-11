@@ -55,6 +55,12 @@
           font-family: 'Jua', sans-serif;
             font-size: 23px;
       }
+      .reflash_btn{
+          
+          height: 35px;
+          font-family: 'Jua', sans-serif;
+            font-size: 23px;
+      }
       .view{
         width: 700px;
         height: 500px;
@@ -161,6 +167,31 @@
             </td>
         </tr>
       </table><!--가장 큰 테이블 틀 끝-->
+      <div class="row" style="float:right">
+        <button class="reflash_btn" onclick="location.href='{% url 'reflash' %}'">새로고침</button>
+      </div>
+      <div class="row">
+        <div class="col" >
+          <form class="stock_form">
+            <div class="form-row">
+              <div class="col-4">
+                <input type="text" class="form-control" placeholder="종목 이름">
+              </div>
+              <div class="col-2">
+                <input type="number" class="form-control" placeholder="매입 가격">
+              </div>
+              <div class="col-2">
+                <input type="number" class="form-control" placeholder="거래량" name="">
+              </div>
+              <div class="col-1">
+                <button type="button" class="btn btn-light" onclick="">등록</button>
+              </div>
+              
+            </div>
+          </form>
+        </div>
+      </div>  
+
     </div>
     
       
