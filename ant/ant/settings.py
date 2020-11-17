@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'simulation',
     'selecting',
     'accounts.apps.AccountsConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

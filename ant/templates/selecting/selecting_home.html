@@ -99,7 +99,7 @@
               {% endif %}
           </tr>
       </table><!--최상단 회원명|HOME|마이페이지 끝-->
-      {% endblock %}
+
     </div>
     <div class="container" style="margin-top:40px;">
       <div class="row"style="margin:10px;">
@@ -170,28 +170,34 @@
       <div class="row" style="float:right">
         <button class="reflash_btn" onclick="location.href='{% url 'reflash' %}'">새로고침</button>
       </div>
+
       <div class="row">
         <div class="col" >
-          <form class="stock_form">
+          <form class="stock_form" action="{% url 'add_autoset' %}" method="POST" >{% csrf_token %}
+         
             <div class="form-row">
-              <div class="col-4">
-                <input type="text" class="form-control" placeholder="종목 이름">
+             
+               <div class="col-4">
+                <input type="text" class="form-control" placeholder="종목 이름" name="sname">
               </div>
               <div class="col-2">
-                <input type="number" class="form-control" placeholder="매입 가격">
+                <input type="number" class="form-control" placeholder="설정 가격" name="set_money">
               </div>
               <div class="col-2">
-                <input type="number" class="form-control" placeholder="거래량" name="">
+                <input type="number" class="form-control" placeholder="매입 가격" name="input">
+              </div>
+              <div class="col-2">
+                <input type="number" class="form-control" placeholder="거래량" name="count">
               </div>
               <div class="col-1">
-                <button type="button" class="btn btn-light" onclick="">등록</button>
+              <button type="submit" class="btn btn-light">등록</button>
               </div>
-              
             </div>
+           
           </form>
         </div>
       </div>  
-
+      {% endblock %}
     </div>
     
       

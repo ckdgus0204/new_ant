@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('home/', ergate.views.home, name="home"),
-    path('mypage/', ergate.views.mypage, name="mypage"),
+    path('mypage/', ergate.views.mypage, name='mypage'),
     path('trading_home/', ergate.views.trading_home, name="trading_home"),
     path('simulation/',include('simulation.urls')),
     path('selecting/',include('selecting.urls')),

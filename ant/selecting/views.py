@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import yfinance as yf
 import pandas as pd
 from pandas_datareader import data
+from ergate.models import Stockitem, Autoset
+from .forms import Add_AutosetForm
 import time
 
 # Create your views here.
@@ -23,6 +25,34 @@ def reflash(request):
         )
         chart_data.to_csv ("../data/"+i+".csv", index=True, header=True)
     return render(request,'selecting/selecting_home.html')
-
-def trade_registration(request):
-    
+def add_Autoset(request):
+    if request.method == "POST":
+        print(request.user)
+        print(request.POST["sname"])
+        mylists=Stockitem.objects.get(name = request.POST["sname"])
+        print(mylists)
+        print(mylists.stock_num)
+        if mylists is not  None:
+            form = Add_AutosetForm(request.POST)
+            if form.is_valid():
+                autoset = Autoset()
+                autoset = form.save(commit=False)
+                autoset.s_num=mylists
+                autoset.sname=mylists.name
+                autoset.uname=request.user
+                
+                autoset.save()
+                return redirect('selecting_home')
+            else:
+                form = Add_AutosetForm()
+                print('form not valid')
+                return render(request, 'home.html',{'form':form})
+        else:
+            form = Add_AutosetForm()
+            print('비밀번호와 비밀번호 확인이 다름')
+            return render(request,  'home.html',{'form':form})
+    else:
+        form = Add_AutosetForm()
+        print('request not post')
+        return render(request, 'home.html',{'form':form})
+        

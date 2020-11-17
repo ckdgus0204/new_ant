@@ -97,37 +97,31 @@
                       </tr>
                     </thead>
                     <tbody>
+                      {% for mylist in mylists %}
                       <tr>
-                        <th scope="row">1</th>
-                        <td>삼성전자</td>
-                        <td>10</td>
-                        <td>910,372</td>
+                        <th scope="row"> </th>
+                        <td>{{mylist.sname}}</td>
+                        <td>{{mylist.count}}</td>
+                        <td>{{mylist.today}}</td>
                         <td>매입</td>
-                        <td>+4,948</td>
-                        <td>거래중</td>
-                        <td><button type="button" class="btn btn-light">중지</button></td>
+                        <td>
+                          <script>
+                            if (({{mylist.today}} - {{mylist.input}}) > 0)
+                              document.write("+",{{mylist.today}}-{{mylist.input}});
+                            else
+                              document.write({{mylist.today}}-{{mylist.input}});
+                          </script>
+                          </td>
+                        {% if mylist.end_date == null %}
+                          <td>거래중</td>
+                          <td><button type="button" class="btn btn-light">중지</button></td>
+                        {% else %}
+                          <td>거래완료</td>
+                          <td><button type="button" class="btn btn-light">완료</button></td>
+                        {% endif %}
                       </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>카카오</td>
-                        <td>20</td>
-                        <td>473,438</td>
-                        <td>매입</td>
-                        <td>+34,030</td>
-                        <td>거래중</td>
-                        <td><button type="button" class="btn btn-light">중지</button></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>SK하이닉스</td>
-                        <td>20</td>
-                        <td>1,304,572</td>
-                        <td>매입</td>
-                        <td>+29,603</td>
-                        <td>거래중</td>
-                        <td><button type="button" class="btn btn-light">중지</button></td>
-                       </tr>
-                       <tr>
+                      {% endfor %}
+                      
                          <td colspan="8">
 						 <!--
                           <div class="row">
