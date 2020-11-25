@@ -13,8 +13,7 @@ def selecting_home(request):
 def reflash(request):
     yf.pdr_override()
     
-    symbols = ['005930','000660','005935','207940','035420','068270','051910','005380','051900','028260','006400',
-                '012330','017670','036570','005490','035720','105560','055550','015760','034730']
+    symbols = ['005930','000660','005935','207940','035420','068270','051910','005380','051900','028260','006400','012330','017670','036570','005490','035720','105560','055550','015760','034730'] #
     tm=time.strftime('%Y-%m-%d', time.localtime(time.time()))
 
     for i in symbols:
@@ -23,8 +22,17 @@ def reflash(request):
             '2020-01-01', # start
             tm
         )
-        chart_data.to_csv ("../data/"+i+".csv", index=True, header=True)
+        try:
+            stocklists=Autoset.objects.filter(s_num = i)
+            for stocklist in stocklists:
+                stocklist.today=chart_data.loc[chart_data.index[len(chart_data.index)-1], 'Close']
+                stocklist.save()
+        except: #refresh stockitem.today
+            pass
+        chart_data.to_csv ("../data/"+i+".csv", index=True, header=True)    #save csv
+
     return render(request,'selecting/selecting_home.html')
+
 def add_Autoset(request):
     if request.method == "POST":
         print(request.user)

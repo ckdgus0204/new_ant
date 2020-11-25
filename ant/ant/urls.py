@@ -23,6 +23,8 @@ urlpatterns = [
     path('home/', ergate.views.home, name="home"),
     path('mypage/', ergate.views.mypage, name='mypage'),
     path('trading_home/', ergate.views.trading_home, name="trading_home"),
+    path('trading_end/', ergate.views.trading_end, name="trading_end"),
+
     path('simulation/',include('simulation.urls')),
     path('selecting/',include('selecting.urls')),
 ]

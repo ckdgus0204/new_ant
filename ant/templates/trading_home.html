@@ -99,6 +99,8 @@
                     <tbody>
                       {% for mylist in mylists %}
                       <tr>
+                        <form action="{% url 'trading_end' %}" method="post">
+                        {% csrf_token %}
                         <th scope="row"> </th>
                         <td>{{mylist.sname}}</td>
                         <td>{{mylist.count}}</td>
@@ -114,11 +116,13 @@
                           </td>
                         {% if mylist.end_date == null %}
                           <td>거래중</td>
-                          <td><button type="button" class="btn btn-light">중지</button></td>
+                          <td><button type="submit"  name="submit" class="btn btn-light">중지</button></td>
+                          <td><input type="hidden" name="mylist" value="{{mylist.auto_num}}" /></td>
                         {% else %}
                           <td>거래완료</td>
                           <td><button type="button" class="btn btn-light">완료</button></td>
                         {% endif %}
+                          </form>
                       </tr>
                       {% endfor %}
                       

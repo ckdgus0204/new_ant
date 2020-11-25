@@ -137,27 +137,32 @@
              </div>
            </div>
          </div>
-    <div class="row">
-      <div class="col" style="padding-bottom: 20px;">
-        <form class="stock_form">
-          <div class="form-row">
-            <div class="col-4">
-              <input type="text" class="form-control" placeholder="종목 이름">
-            </div>
-            <div class="col-2">
-              <input type="number" class="form-control" placeholder="매입 가격">
-            </div>
-            <div class="col-2">
-              <input type="number" class="form-control" placeholder="거래량">
-            </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-light">등록</button>
-            </div>
-            
+         <div class="row">
+          <div class="col" >
+            <form class="stock_form" action="{% url 'add_simulation' %}" method="POST" >{% csrf_token %}
+           
+              <div class="form-row">
+               
+                 <div class="col-4">
+                  <input type="text" class="form-control" placeholder="종목 이름" name="sname">
+                </div>
+                <div class="col-2">
+                  <input type="number" class="form-control" placeholder="설정 가격" name="set_money">
+                </div>
+                <div class="col-2">
+                  <input type="number" class="form-control" placeholder="매입 가격" name="input">
+                </div>
+                <div class="col-2">
+                  <input type="number" class="form-control" placeholder="거래량" name="count">
+                </div>
+                <div class="col-1">
+                <button type="submit" class="btn btn-light">등록</button>
+                </div>
+              </div>
+             
+            </form>
           </div>
-        </form>
-      </div>
-    </div>          
+        </div>  
 
   </div><!--가장 큰 틀-->
 
