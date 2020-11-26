@@ -9,6 +9,9 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
 
   <meta charset="UTF-8">
   <title>주가예측 기반 금융 거래 자동화</title>
@@ -120,43 +123,57 @@
                             <div class="row">
                          <div class="col-2">
                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                             <a class="nav-link active" id="v-pills-1st-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">삼성전자</a>
-                             <a class="nav-link" id="v-pills-1_2-tab" data-toggle="pill" href="#v-pills-1_2" role="tab" aria-controls="v-pills-1_2" aria-selected="false">네이버</a>
-                             <a class="nav-link" id="v-pills-2nd-tab" data-toggle="pill" href="#v-pills-2nd" role="tab" aria-controls="v-pills-2nd" aria-selected="false">카카오</a>
-                             <a class="nav-link" id="v-pills-3rd-tab" data-toggle="pill" href="#v-pills-3rd" role="tab" aria-controls="v-pills-3rd" aria-selected="false">한전</a>
-                             <a class="nav-link" id="v-pills-4st-tab" data-toggle="pill" href="#v-pills-4rd" role="tab" aria-controls="v-pills-4rd" aria-selected="false">현대건설</a>
-                             <a class="nav-link" id="v-pills-5st-tab" data-toggle="pill" href="#v-pills-5rd" role="tab" aria-controls="v-pills-5rd" aria-selected="false">sk하이닉스</a>
-                             <a class="nav-link" id="v-pills-6st-tab" data-toggle="pill" href="#v-pills-6rd" role="tab" aria-controls="v-pills-6rd" aria-selected="false">NCsoft</a>
-                             <a class="nav-link" id="v-pills-7st-tab" data-toggle="pill" href="#v-pills-7rd" role="tab" aria-controls="v-pills-7rd" aria-selected="false">LG전자</a>
+                             <a class="nav-link active" id="v-pills-1st-tab" data-toggle="pill" href="#v-pills-005930" role="tab" aria-controls="v-pills-005930" aria-selected="true">삼성전자</a>
+                             <a class="nav-link" id="v-pills-1_2-tab" data-toggle="pill" href="#v-pills-035420" role="tab" aria-controls="v-pills-035420" aria-selected="false">NAVER</a>
+                             <a class="nav-link" id="v-pills-2nd-tab" data-toggle="pill" href="#v-pills-035720" role="tab" aria-controls="v-pills-035720" aria-selected="false">카카오</a>
+                             <a class="nav-link" id="v-pills-3rd-tab" data-toggle="pill" href="#v-pills-015760" role="tab" aria-controls="v-pills-015760" aria-selected="false">한국전력</a>
+                             <a class="nav-link" id="v-pills-4st-tab" data-toggle="pill" href="#v-pills-068270" role="tab" aria-controls="v-pills-068270" aria-selected="false">셀트리온</a>
+                             <a class="nav-link" id="v-pills-5st-tab" data-toggle="pill" href="#v-pills-000660" role="tab" aria-controls="v-pills-000660" aria-selected="false">sk하이닉스</a>
+                             <a class="nav-link" id="v-pills-6st-tab" data-toggle="pill" href="#v-pills-036570" role="tab" aria-controls="v-pills-036570" aria-selected="false">엔씨소프트</a>
+                             <a class="nav-link" id="v-pills-7st-tab" data-toggle="pill" href="#v-pills-051910" role="tab" aria-controls="v-pills-051910" aria-selected="false">LG화학</a>
+                             <a class="nav-link" id="v-pills-8st-tab" data-toggle="pill" href="#v-pills-105560" role="tab" aria-controls="v-pills-105560" aria-selected="false">KB금융</a>
+                             <a class="nav-link" id="v-pills-9st-tab" data-toggle="pill" href="#v-pills-034730" role="tab" aria-controls="v-pills-034730" aria-selected="false">SK</a>
+                             <a class="nav-link" id="v-pills-10st-tab" data-toggle="pill" href="#v-pills-006400" role="tab" aria-controls="v-pills-006400" aria-selected="false">삼성sdi</a>
+
                             </div>
                          </div>
                          <div class="col-9">
                            <div class="tab-content" id="v-pills-tabContent">
-                             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                             <div class="tab-pane fade show active" id="v-pills-005930" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                  <img src="{% static 'samsung.PNG' %}" alt="">
                              </div>
-                             <div class="tab-pane fade" id="v-pills-1_2" role="tabpanel" aria-labelledby="v-pills-1_2-tab">
+                             <div class="tab-pane fade" id="v-pills-035420" role="tabpanel" aria-labelledby="v-pills-1_2-tab">
                                 <img src="{% static 'naver.PNG' %}" alt="">
         
                              </div>
-                             <div class="tab-pane fade" id="v-pills-2nd" role="tabpanel" aria-labelledby="v-pills-2nd-tab">
+                             <div class="tab-pane fade" id="v-pills-035720" role="tabpanel" aria-labelledby="v-pills-2nd-tab">
                                 <img src="{% static 'kakao.PNG' %}" alt="">
                              </div>
-                             <div class="tab-pane fade" id="v-pills-3rd" role="tabpanel" aria-labelledby="v-pills-3rd-tab">
+                             <div class="tab-pane fade" id="v-pills-015760" role="tabpanel" aria-labelledby="v-pills-3rd-tab">
                                 <img src="{% static 'korea_e.PNG' %}" alt="">
                              </div>
-                             <div class="tab-pane fade" id="v-pills-4rd" role="tabpanel" aria-labelledby="v-pills-4rd-tab">
-                                <img src="{% static 'hyundai_.PNG' %}" alt="">
+                             <div class="tab-pane fade" id="v-pills-068270" role="tabpanel" aria-labelledby="v-pills-4rd-tab">
+                                <img src="{% static '셀트리온.PNG' %}" alt="">
                              </div>
-                             <div class="tab-pane fade" id="v-pills-5rd" role="tabpanel" aria-labelledby="v-pills-5rd-tab">
+                             <div class="tab-pane fade" id="v-pills-000660" role="tabpanel" aria-labelledby="v-pills-5rd-tab">
                                 <img src="{% static 'hynix.PNG' %}" alt="">
                              </div>
-                             <div class="tab-pane fade" id="v-pills-6rd" role="tabpanel" aria-labelledby="v-pills-6rd-tab">
+                             <div class="tab-pane fade" id="v-pills-036570" role="tabpanel" aria-labelledby="v-pills-6rd-tab">
                                 <img src="{% static 'ncsoft.PNG' %}" alt="">
                              </div>
-                             <div class="tab-pane fade" id="v-pills-7rd" role="tabpanel" aria-labelledby="v-pills-7rd-tab">
-                                <img src="{% static 'lg.PNG' %}" alt="">
-                             </div>
+                             <div class="tab-pane fade" id="v-pills-051910" role="tabpanel" aria-labelledby="v-pills-7rd-tab">
+                              <img src="{% static 'lg화학.PNG' %}" alt="">
+                            </div>                             
+                            <div class="tab-pane fade" id="v-pills-105560" role="tabpanel" aria-labelledby="v-pills-8rd-tab">
+                              <img src="{% static 'kb금융.PNG' %}" alt="">
+                            </div>                             
+                            <div class="tab-pane fade" id="v-pills-034730" role="tabpanel" aria-labelledby="v-pills-9rd-tab">
+                              <img src="{% static 'SK.PNG' %}" alt="">
+                            </div>                             
+                            <div class="tab-pane fade" id="v-pills-006400" role="tabpanel" aria-labelledby="v-pills-10rd-tab">
+                              
+                            </div>                             
+                     
                            </div>
                          </div>
                        </div>
@@ -170,7 +187,325 @@
       <div class="row" style="float:right">
         <button class="reflash_btn" onclick="location.href='{% url 'reflash' %}'">새로고침</button>
       </div>
+<script>
 
+    var chart = c3.generate({
+      size:{
+        height:400
+      },
+      size:{
+        height:400
+      },
+      bindto: "#v-pills-005930",
+      data: {
+                x: 'Date',
+                url: '{% static "data/005930.csv" %}',
+                hide:['Volume']
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    tick: {
+                        count: 100
+                    }
+                },
+                y: {
+                    tick: {
+                        format: function(d) {
+                            return d + "";
+                        }
+                    },
+                }
+            },
+            point: {
+                show: false
+            },
+            
+            
+    });
+    var chart = c3.generate({
+      size:{
+        height:400
+      },
+      bindto: "#v-pills-035420",
+      data: {
+                x: 'Date',
+                url: '{% static "data/035420.csv" %}',
+                hide:['Volume']
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    tick: {
+                        count: 100
+                    }
+                },
+                y: {
+                    tick: {
+                        format: function(d) {
+                            return d + "";
+                        }
+                    },
+                }
+            },
+            point: {
+                show: false
+            },
+    });    var chart = c3.generate({
+      size:{
+        height:400
+      },
+      bindto: "#v-pills-035720",
+      data: {
+                x: 'Date',
+                url: '{% static "data/035720.csv" %}',
+                hide:['Volume']
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    tick: {
+                        count: 100
+                    }
+                },
+                y: {
+                    tick: {
+                        format: function(d) {
+                            return d + "";
+                        }
+                    },
+                }
+            },
+            point: {
+                show: false
+            },
+    });    var chart = c3.generate({
+      size:{
+        height:400
+      },
+      bindto: "#v-pills-015760",
+      data: {
+                x: 'Date',
+                url: '{% static "data/015760.csv" %}',
+                hide:['Volume']
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    tick: {
+                        count: 100
+                    }
+                },
+                y: {
+                    tick: {
+                        format: function(d) {
+                            return d + "";
+                        }
+                    },
+                }
+            },
+            point: {
+                show: false
+            },
+    });    var chart = c3.generate({
+      size:{
+        height:400
+      },
+      bindto: "#v-pills-068270",
+      data: {
+                x: 'Date',
+                url: '{% static "data/068270.csv" %}',
+                hide:['Volume']
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    tick: {
+                        count: 100
+                    }
+                },
+                y: {
+                    tick: {
+                        format: function(d) {
+                            return d + "";
+                        }
+                    },
+                }
+            },
+            point: {
+                show: false
+            },
+    });    var chart = c3.generate({
+      size:{
+        height:400
+      },
+      bindto: "#v-pills-000660",
+      data: {
+                x: 'Date',
+                url: '{% static "data/000660.csv" %}',
+                hide:['Volume']
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    tick: {
+                        count: 100
+                    }
+                },
+                y: {
+                    tick: {
+                        format: function(d) {
+                            return d + "";
+                        }
+                    },
+                }
+            },
+            point: {
+                show: false
+            },
+    });    var chart = c3.generate({
+      size:{
+        height:400
+      },
+      bindto: "#v-pills-036570",
+      data: {
+                x: 'Date',
+                url: '{% static "data/036570.csv" %}',
+                hide:['Volume']
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    tick: {
+                        count: 100
+                    }
+                },
+                y: {
+                    tick: {
+                        format: function(d) {
+                            return d + "";
+                        }
+                    },
+                }
+            },
+            point: {
+                show: false
+            },
+    });    var chart = c3.generate({
+      size:{
+        height:400
+      },
+      bindto: "#v-pills-051910",
+      data: {
+                x: 'Date',
+                url: '{% static "data/051910.csv" %}',
+                hide:['Volume']
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    tick: {
+                        count: 100
+                    }
+                },
+                y: {
+                    tick: {
+                        format: function(d) {
+                            return d + "";
+                        }
+                    },
+                }
+            },
+            point: {
+                show: false
+            },
+    });    var chart = c3.generate({
+      size:{
+        height:400
+      },
+      bindto: "#v-pills-105560",
+      data: {
+                x: 'Date',
+                url: '{% static "data/105560.csv" %}',
+                hide:['Volume']
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    tick: {
+                        count: 100
+                    }
+                },
+                y: {
+                    tick: {
+                        format: function(d) {
+                            return d + "";
+                        }
+                    },
+                }
+            },
+            point: {
+                show: false
+            },
+    });var chart = c3.generate({
+      size:{
+        height:400
+      },
+      bindto: "#v-pills-034730",
+      data: {
+                x: 'Date',
+                url: '{% static "data/034730.csv" %}',
+                hide:['Volume']
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    tick: {
+                        count: 100
+                    }
+                },
+                y: {
+                    tick: {
+                        format: function(d) {
+                            return d + "";
+                        }
+                    },
+                }
+            },
+            point: {
+                show: false
+            },
+    });var chart = c3.generate({
+      size:{
+        height:400
+      },
+      bindto: "#v-pills-006400",
+      data: {
+                x: 'Date',
+                url: '{% static "data/006400.csv" %}',
+                hide:['Volume']
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    tick: {
+                        count: 100
+                    }
+                },
+                y: {
+                    tick: {
+                        format: function(d) {
+                            return d + "";
+                        }
+                    },
+                }
+            },
+            point: {
+                show: false
+            },
+    });
+  
+</script>
       <div class="row">
         <div class="col" >
           <form class="stock_form" action="{% url 'add_autoset' %}" method="POST" >{% csrf_token %}

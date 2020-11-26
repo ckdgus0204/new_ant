@@ -58,8 +58,6 @@ def mypage(request):
     request.user.before_account=0
     request.user.account=0
     for mylist in mylists:
-        print(mylist)
-        print(mylist.today)
         request.user.account=((request.user.account)+mylist.today)
         request.user.before_account=request.user.before_account+mylist.input
     request.user.total_profit=request.user.account-request.user.before_account

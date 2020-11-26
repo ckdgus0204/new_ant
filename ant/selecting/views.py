@@ -29,7 +29,7 @@ def reflash(request):
                 stocklist.save()
         except: #refresh stockitem.today
             pass
-        chart_data.to_csv ("../data/"+i+".csv", index=True, header=True)    #save csv
+        chart_data.to_csv ("./static/data/"+i+".csv", index=True, header=True)    #save csv
 
     return render(request,'selecting/selecting_home.html')
 
