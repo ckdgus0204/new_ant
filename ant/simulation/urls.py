@@ -6,5 +6,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('s_home/' ,views.simulation_home, name='s_home'),
     path('s_select/' ,views.simulation_select, name='s_select'),
+    path('add_simulation',views.add_Simulation, name='add_simulation'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

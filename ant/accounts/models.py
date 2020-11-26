@@ -2,8 +2,6 @@ from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,Permissi
 from django.db import models 
 class UserManager(BaseUserManager):    
     
-    
-    
     def create_user(self, username,account,date,name , password):        
         user = self.model(            
             name = name,
@@ -42,6 +40,16 @@ class User(AbstractBaseUser,PermissionsMixin):
         null=False,          
     )    
     account = models.FloatField(
+        default=0
+    )     
+    before_account = models.FloatField(
+        default=0
+    )     
+    total_profit = models.FloatField(
+        default=0
+    )     
+    profit_percent= models.FloatField(
+        default=0
     )     
     date = models.DateTimeField(
         auto_now_add=True,

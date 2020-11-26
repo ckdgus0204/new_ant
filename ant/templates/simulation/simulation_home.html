@@ -24,6 +24,7 @@
         .maintable td{
             width:500px;
         }
+        
         .cont_div{
             height: 500px;
         }
@@ -35,12 +36,13 @@
         }
         .sele_table{
           margin-top: 30px;
+          font-family: 'Jua', sans-serif;
         }
     </style>
 </head>
 
 <body>
-    <div >
+    <div></div>
       {% block content %}
       <table class="topmenu"><!--최상단 회원명|HOME|마이페이지-->
           <tr>
@@ -67,7 +69,7 @@
 
     </div>
     <table class="sele_table"><!--가장 큰 테이블 틀-->
-    <div>
+      <div>
         <table class="maintable">
             <tr>
                 <td style="text-align: left;">
@@ -75,7 +77,7 @@
                 </td>
                 <td>
                     <div style="border:solid 1px;">
-                        2020년 10월 11일 주가예측 기반 모의 거래
+                        {{year}}년 {{month}}월 {{day}}일 주가예측 기반 모의 거래
                     </div>
                 </td>
             </tr>
@@ -92,24 +94,15 @@
                               </tr>
                             </thead>
                             <tbody>
+                              {% for mylist in mylists %}
                               <tr>
-                                <th scope="row">1</th>
-                                <td>삼성전자</td>
-                                <td>901,372</td>
-                                <td>10주</td>
+                                <th scope="row"></th>
+                                <td>{{mylist.sname}}</td>
+                                <td>{{mylist.input}}</td>
+                                <td>{{mylist.count}}</td>
                               </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>네이버</td>
-                                <td>50,246</td>
-                                <td>1주</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>kakao</td>
-                                <td>620,856</td>
-                                <td>100주</td>
-                              </tr>
+                              {% endfor %}
+                              
                             </tbody>
                           </table>
                        
@@ -130,27 +123,23 @@
                               </tr>
                             </thead>
                             <tbody>
+                              {% for mylist in mylists %}
                               <tr>
-                                <th scope="row">1</th>
-                                <td>900,264</td>
-                                <td>+1,308</td>
-                                <td>933,432</td>
-                                <td>890,592</td>
+                                <th scope="row"></th>
+                                <td>{{mylist.today}}</td>
+                                <td>
+                                  <script>
+                                    if({{mylist.today}}-{{mylist.input}}>0)
+                                      document.write("+",{{mylist.today}}-{{mylist.input}})
+                                    else
+                                      document.write({{mylist.today}}-{{mylist.input}})
+                                  </script>
+                                </td>
+                                <td></td>
+                                <td></td>
                               </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>49,362</td>
-                                <td>-884</td>
-                                <td>53,423</td>
-                                <td>47,568</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>610,357</td>
-                                <td>-10,499</td>
-                                <td>610,532</td>
-                                <td>570,351</td>
-                              </tr>
+                              {% endfor %}
+                              
                             </tbody>
                           </table>
                     </div>
@@ -158,19 +147,24 @@
             </tr>
 
         </table>
-
-    </div>
-    <div class="container">
-      <div class="col">
-        <div class="row">
-          <button type="button" style="margin-right: 0px;font-family: 'Jua', sans-serif;" class="btn pull-right" onclick="location.href='{% url 's_select' %}'">시뮬레이션 등록</button>
-
-        </div>
-
       </div>
-      
-    </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-9">
+
+          </div>
+          <div class="col">          
+            <button type="button" style="font-family: 'Jua', sans-serif;" class="btn btn-light" onclick="location.href='{% url 's_select' %}'">시뮬레이션 등록</button>
+          </div>
+        </div>
+      </div>
+      <tr>
+        <td>
+        </td>
+      </tr>
+    </table>
     {% endblock %}
+    
 
 </body>
 
